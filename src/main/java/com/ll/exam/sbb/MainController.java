@@ -65,7 +65,7 @@ public class MainController {
     public String gugudan(int dan, int limit) {
         return IntStream.rangeClosed(1, limit)
                 .mapToObj(i -> "%d * %d = %d".formatted(dan, i, dan*i))
-                .collect(Collectors.joining("<br>"));
+                .collect(Collectors.joining("<br>\n"));
     }
     //실습5
     @GetMapping("/mbti")
@@ -77,4 +77,26 @@ public class MainController {
         if(name.equals("본인")) return "ESTJ";
         return "unknown";
     }
+    @GetMapping("/mbti/{name}")
+    @ResponseBody
+    public String mbti2(@PathVariable String name) {
+        String rs = switch(name) {
+            case "홍길동" -> "INFP";
+            case "홍길순" -> "ENFP";
+            case "임꺽정", "임걱정" -> "INPJ";
+            case "본인" -> "ESTJ";
+            default -> "unknown";
+        };
+        return rs;
+//        return switch(name) {
+//            case "홍길동" -> "INFP";
+//            case "홍길순" -> "ENFP";
+//            case "임꺽정" -> "INPJ";
+//            case "본인" -> "ESTJ";
+//            default -> "unknown";
+//        };
+    }
+//    @GetMapping("/saveSessionAge")
+//    @ResponseBody
+//    public void
 }
