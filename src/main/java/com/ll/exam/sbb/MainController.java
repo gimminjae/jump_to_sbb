@@ -96,7 +96,15 @@ public class MainController {
 //            default -> "unknown";
 //        };
     }
-//    @GetMapping("/saveSessionAge")
-//    @ResponseBody
-//    public void
+    //실습6
+    @GetMapping("/saveSession/{name}/{value}")
+    @ResponseBody
+    public String saveSession() {
+        return "";
+    }
+    @GetMapping("/getSession/{name}")
+    @ResponseBody
+    public String getSessionAge() {
+        return "";
+    }
 }
