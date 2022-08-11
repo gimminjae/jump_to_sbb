@@ -13,7 +13,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Transactional
 class QuestionRepositoryTests {
     @Autowired
     private QuestionRepository questionRepository;
@@ -32,7 +31,7 @@ class QuestionRepositoryTests {
     }
 
     public static void clearData(QuestionRepository questionRepository) {
-        questionRepository.truncate();
+        questionRepository.truncateTable();
     }
 
     public static int createSampleData(QuestionRepository questionRepository) {
@@ -65,8 +64,8 @@ class QuestionRepositoryTests {
         q2.setCreateDate(LocalDateTime.now());
         this.questionRepository.save(q2); //두 번째 질문 저장
 
-        assertThat(q1.getId()).isGreaterThan(lastSampleDataId + 1);
-        assertThat(q2.getId()).isGreaterThan(lastSampleDataId + 2);
+        assertThat(q1.getId()).isEqualTo(lastSampleDataId + 1);
+        assertThat(q2.getId()).isEqualTo(lastSampleDataId + 2);
     }
 
     @Test
