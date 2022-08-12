@@ -29,7 +29,10 @@ public class AnswerRepositoryTests {
 
     private void createSampleData() {
         QuestionRepositoryTests.createSampleData(questionRepository);
+        // 관련 답변이 하나없는 상태에서 쿼리 발생
         Question q = questionRepository.findById(1).get();
+
+        System.out.println("q 1st : " + q);
 
         Answer a1 = new Answer();
         a1.setContent("sbb는 질문답변 게시판 입니다.");
@@ -82,6 +85,8 @@ public class AnswerRepositoryTests {
     void question으로부터_관련된_질문들_조회() {
         //select * from question where id = 1
         Question q = questionRepository.findById(1).get();
+
+        System.out.println("q 2nd : " + q);
         //DB연결이 끊김
 
         //select * from answer where question_id = 1;
