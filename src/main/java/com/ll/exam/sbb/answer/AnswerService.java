@@ -13,9 +13,10 @@ public class AnswerService {
 
     public void create(Question question, String content) {
         Answer answer = new Answer();
-        answer.setQuestion(question);
         answer.setContent(content);
         answer.setCreateDate(LocalDateTime.now());
+        question.addAnswer(answer);
+
         answerRepository.save(answer);
     }
 }
