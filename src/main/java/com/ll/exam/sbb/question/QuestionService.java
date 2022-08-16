@@ -18,12 +18,8 @@ public class QuestionService {
     }
 
     public Question getQuestion(int id) throws DataNotFoundException {
-        Optional<Question> optionalQuestion = questionRepository.findById(id);
-
-        if(optionalQuestion.isPresent()) {
-            return optionalQuestion.get();
-        }
-        throw new DataNotFoundException("question not found");
+        return questionRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("no %d question not found".formatted(id)));
     }
 
 }
