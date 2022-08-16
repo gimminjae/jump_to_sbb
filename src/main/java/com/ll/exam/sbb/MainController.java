@@ -20,6 +20,12 @@ public class MainController {
     public MainController() {
         makeTestData();
     }
+
+    @RequestMapping("/")
+    public String root() {
+        return "redirect:/question/list";
+    }
+
     //실습1
     @RequestMapping("/sbb")
     @ResponseBody //아래 함수의 리턴값을 문자열화해 그대로 브라우저의 응답에 담는다.
