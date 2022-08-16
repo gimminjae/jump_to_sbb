@@ -18,13 +18,14 @@ import java.util.List;
 // DB는 리포지터리를 몰라야 한다.
 // SPRING DATA JPA는 MySQL을 몰라야 한다.
 // SPRING DATA JPA(리포지터리) -> JPA -> 하이버네이트 -> JDBC -> MySQL Driver -> MySQL
+@RequestMapping("/question")
 @Controller
 @RequiredArgsConstructor // 생성자 주입
 public class QuestionController {
     // @Autowired // 필드 주입
     private final QuestionService questionService;
 
-    @RequestMapping("/question/list")
+    @RequestMapping("/list")
     // 이 자리에 @ResponseBody가 없으면 resources/question_list/question_list.html 파일을 뷰로 삼는다.
     public String list(Model model) {
         List<Question> questionList = questionService.getList();
@@ -36,7 +37,7 @@ public class QuestionController {
         return "question_list";
     }
 
-    @RequestMapping("/question/detail/{id}")
+    @RequestMapping("/detail/{id}")
     public String detail(Model model, @PathVariable Integer id) {
         Question question = questionService.getQuestion(id);
         model.addAttribute("question", question);
