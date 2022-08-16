@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Controller
-@RequiredArgsConstructor // 생성자 주입
+
 // 컨트롤러는 Repository가 있는지 몰라야 한다.
 // 서비스는 웹브라우저라는것이 이 세상에 존재하는지 몰라야 한다.
 // 리포지터리는 서비스를 몰라야 한다.
@@ -18,6 +18,8 @@ import java.util.List;
 // DB는 리포지터리를 몰라야 한다.
 // SPRING DATA JPA는 MySQL을 몰라야 한다.
 // SPRING DATA JPA(리포지터리) -> JPA -> 하이버네이트 -> JDBC -> MySQL Driver -> MySQL
+@Controller
+@RequiredArgsConstructor // 생성자 주입
 public class QuestionController {
     // @Autowired // 필드 주입
     private final QuestionService questionService;
@@ -34,9 +36,10 @@ public class QuestionController {
         return "question_list";
     }
 
-    @RequestMapping("/question/list2")
-    @ResponseBody
-    public String list2() {
-        return "하하111777";
+    @RequestMapping("/question/detail/{id}")
+    public String detail(Model model, @PathVariable Integer id) {
+        Question question = questionService.getQuestion(id);
+        model.addAttribute("question", question);
+        return "question_detail";
     }
 }
